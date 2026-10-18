@@ -1,0 +1,60 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0b3d5c"><title>Whiteface Weather</title>
+<link rel="manifest" href="manifest.json"><link rel="icon" href="icon-192.png"><link rel="apple-touch-icon" href="icon-192.png">
+<style>
+[hidden]{display:none!important}
+body{margin:0;font-family:system-ui,sans-serif;background:#0b3d5c;color:#fff;text-align:center}
+main{max-width:480px;margin:auto;padding:16px}h1{font-size:1.1rem;font-weight:600;opacity:.9;margin:8px 0 2px}.sub{font-size:.8rem;opacity:.7;margin-bottom:8px}
+#temp{font-size:5.5rem;font-weight:700;line-height:1}#tempc{font-size:2.2rem;font-weight:600;opacity:.9;margin:2px 0 4px}#feels{opacity:.85;margin-bottom:12px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;text-align:left}
+.c{background:#ffffff1a;border-radius:12px;padding:10px}.c b{display:block;font-size:.75rem;opacity:.7;font-weight:400}.c span{font-size:1.15rem}
+button{margin:14px 0;font-size:1rem;padding:10px 24px;border:0;border-radius:24px;background:#fff;color:#0b3d5c}
+a{color:#9fd3ff}#time,#err{font-size:.85rem;opacity:.8}#err{color:#ffb4b4}
+h2{font-size:1rem;font-weight:600;margin:20px 0 8px;text-align:left;opacity:.9}
+.days{display:grid;grid-template-columns:1fr;gap:8px}
+.day{background:#ffffff1a;border-radius:12px;padding:8px 6px;font-size:.8rem}
+.day .dn{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:4px}.day .pt{background:#ffffff0d;border-radius:8px;padding:6px 4px}.day .pl{font-size:.72rem;opacity:.75}
+.day .n{font-weight:600;font-size:.9rem}.day .i{font-size:2.2rem;margin:4px 0}
+.day .hl{font-size:1.05rem}.day .hl.lo{opacity:.7}.day .pp{color:#9fd3ff}.day .t{opacity:.85;margin-top:4px;line-height:1.25}
+.chart{margin:8px 0}.lg{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;font-size:.72rem;opacity:.85;margin-top:4px}.c .lg span{font-size:.72rem}.lg i{display:inline-block;margin-right:4px;vertical-align:middle;box-sizing:border-box}.lg .tp{width:14px;height:3px;background:#ffd166;border-radius:2px}.lg .ws{width:14px;height:3px;background:#6ee7b7;border-radius:2px}.lg .wg{width:14px;height:0;border-top:2px dotted #f78fb3}.lg .wg{width:16px;height:3px;border:0;background:linear-gradient(90deg,#f78fb3 0 25%,#ffd166 25% 50%,#ff9f43 50% 75%,#ff6b6b 75%)}.lg .bw,.lg .ba,.lg .bx{width:12px;height:10px;border-radius:2px}.lg .bw{background:rgba(255,214,102,.35)}.lg .ba{background:rgba(255,159,67,.45)}.lg .bx{background:rgba(255,90,90,.5)}.wb{display:inline-block;margin:0 auto 12px;padding:6px 12px;border-radius:14px;font-weight:600;font-size:.9rem}.wb.orange{background:#ff9f4333;color:#ffb366;border:1px solid #ff9f43}.wb.red{background:#ff5a5a33;color:#ff8a8a;border:1px solid #ff6b6b}.wb.yellow{background:#ffd16626;color:#ffd166;border:1px solid #ffd16699}.wb.small{font-size:.78rem;padding:4px 10px;font-weight:500}.nod{opacity:.7;font-size:.85rem;padding:20px 0}.werr{color:#ffb4b4;font-size:.8rem}.lg .fz{width:16px;height:10px;background:rgba(127,216,255,0.12);border-top:2px dashed #7fd8ff}.lg .rn{width:6px;height:12px;background:#2b7bd6}.lg .cd{width:16px;height:10px;background:rgba(160,140,200,0.25);border-top:2px dashed #8f78d0}.chart svg{width:100%;height:auto;display:block}
+.gs .c i{display:block;font-style:normal;font-size:.8rem;opacity:.8;margin-top:2px}.gs .c i:empty{display:none}
+.n12hd{display:flex;align-items:flex-end;justify-content:space-between;gap:8px}.n12hd h2{margin-bottom:8px}
+.tg{display:flex;margin-bottom:6px;border:1px solid #ffffff44;border-radius:14px;overflow:hidden}.tg button{margin:0;padding:3px 10px;font-size:.75rem;border-radius:0;background:transparent;color:#fff}.tg button.on{background:#fff;color:#0b3d5c;font-weight:600}
+.n12s{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:0 -4px}.n12s svg{min-width:340px}
+.n12x{display:flex;flex-direction:column;gap:3px;margin-top:8px;font-size:.75rem;text-align:left;opacity:.9}.c .n12x span{font-size:.75rem}.n12x b{display:inline;font-size:.75rem;opacity:.85;font-weight:600}
+.wsum{font-size:1.06rem;line-height:1.4;margin:6px 0 4px;padding:9px 12px;border-radius:12px;background:#ffffff14;border-left:4px solid #ffffff44;text-align:left}.wsum.a-frost{border-left-color:#7fd8ff;background:rgba(127,216,255,.10)}.wsum.a-rain,.wsum.a-snow{border-left-color:#2b7bd6;background:rgba(43,123,214,.16)}.wsum.a-snow{border-left-color:#9fd3ff}.wsum.a-yellow{border-left-color:#ffd166;background:rgba(255,214,102,.10)}.wsum.a-orange{border-left-color:#ff9f43;background:rgba(255,159,67,.12)}.wsum.a-red{border-left-color:#ff6b6b;background:rgba(255,90,90,.14)}
+#ferr{color:#ffb4b4;font-size:.85rem}#ftime{font-size:.75rem;opacity:.7;margin-top:6px}
+</style></head><body><main>
+<h1>Whiteface Weather</h1><div class="sub">NYS Mesonet Whiteface Mountain Base station, Wilmington</div>
+<div id="temp">--°</div><div id="tempc">--°C</div><div id="feels">&nbsp;</div><div id="wbadge" hidden></div>
+<div id="wsum" class="wsum" hidden></div>
+<div class="n12hd"><h2><span id="n12h">Next 12 hours</span> · NWS</h2><div id="n12t" class="tg"><button data-n="6">6h</button><button data-n="12" class="on">12h</button></div></div>
+<div class="c chart"><b>Hourly · temp, rain, cloud cover &amp; wind</b><div id="n12"><div class="nod">Loading…</div></div></div>
+<h2>7-day forecast · NWS</h2>
+<div class="c chart"><b>Next 7 days · temp, rain &amp; cloud cover</b><div id="chart"></div></div>
+<div id="days" class="days"></div>
+<div id="ferr"></div><div id="ftime"></div>
+<h2>Current conditions</h2>
+<div class="grid">
+<div class="c"><b>Wind</b><span id="wind">--</span></div><div class="c"><b>Humidity</b><span id="rh">--</span></div>
+<div class="c"><b>Dewpoint</b><span id="dew">--</span></div><div class="c"><b>Pressure (station / sea level)</b><span id="pres">--</span></div>
+<div class="c"><b>Precip 6h / 1d</b><span id="p1">--</span></div><div class="c"><b>Precip 3d / 7d</b><span id="p2">--</span></div>
+<div class="c" id="snowc"><b>Snow depth</b><span id="snow">--</span></div><div class="c"><b>Elevation</b><span id="elev">--</span></div>
+</div>
+<h2>Measured wind, last 24 h</h2>
+<div class="c chart"><b>WFMB 5-minute observations · mph</b><div id="wobs"></div></div><div id="wobserr" class="werr"></div>
+<h2>Wind forecast, 7 days</h2>
+<div class="c chart"><b>NWS hourly speed &amp; gusts · mph</b><div id="wfc"></div></div><div id="wfcnote" class="werr"></div>
+<h2>Ground &amp; sky</h2>
+<div class="grid gs">
+<div class="c"><b>Soil temp 2 in</b><span id="ts05">--</span><i id="fz05">--</i></div><div class="c"><b>Soil moisture 2 in</b><span id="sm05">--</span></div>
+<div class="c"><b>Soil temp 10 in</b><span id="ts25">--</span><i id="fz25">--</i></div><div class="c"><b>Soil moisture 10 in</b><span id="sm25">--</span></div>
+<div class="c"><b>Soil temp 20 in</b><span id="ts50">--</span><i id="fz50">--</i></div><div class="c"><b>Soil moisture 20 in</b><span id="sm50">--</span></div>
+<div class="c"><b>Sunshine</b><span id="srad">--</span></div><div class="c"><b>Dew point</b><span id="gdew">--</span></div>
+<div class="c" id="gfeelsc" hidden><b>Feels like</b><span id="gfeels">--</span></div><div class="c"><b>9 m vs 2 m air</b><span id="inv">--</span><i id="invn"></i></div>
+</div>
+<button id="refresh">↻ Refresh</button>
+<div id="time"></div><div id="err"></div>
+<p><a href="https://www.nysmesonet.org/weather/local#network=nysm&stid=wfmb" target="_blank" rel="noopener">Full Mesonet page →</a></p>
+</main><script src="app.js?v=1"></script><script src="wind.js?v=1"></script><script src="next12.js?v=1"></script><script src="summary.js?v=1"></script><script src="forecast.js?v=1"></script></body></html>
